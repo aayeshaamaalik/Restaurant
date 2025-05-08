@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Restaurant {
+    private QueueManager queueManager = new QueueManager();
     private List<Table> tables;
     private List<Reservation> reservations;
 
@@ -36,7 +37,9 @@ public class Restaurant {
             }
         }
 
-        throw new NoTableForReservationException("No suitable table available for the given time period.");
+        // No table found: queue the party
+        System.out.println("No table available. Adding party to waitlist.");
+        queueManager.addToWaitlist(party);
     }
 
     public List<Reservation> getReservations() {
